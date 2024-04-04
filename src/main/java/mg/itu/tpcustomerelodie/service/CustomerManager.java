@@ -16,6 +16,8 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 import jakarta.persistence.Query;
 
+import mg.itu.tpcustomerelodie.entity.Customer;
+
 @RequestScoped
 public class CustomerManager {
     @PersistenceContext(unitName = "customerPU")
