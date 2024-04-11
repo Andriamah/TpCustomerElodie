@@ -10,25 +10,33 @@
     <h:body>
         <h:form>
             <p:dataTable value="#{customerBean.customers}" 
+                         emptyMessage="Aucun client avec ce critère"
                          var="item"
                          widgetVar="customersTable"
-                paginator="true" rows="10"
-                rowsPerPageTemplate="2,4,8,10"
-                paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+                         paginator="true" rows="10"
+                         rowsPerPageTemplate="2,4,8,10"
+                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+                <f:facet name="header">
+                    <p:outputPanel>
+                        <h:outputText value="Recherche dans tous les champs de recherche"/>
+                        <p:inputText id="globalFilter" onkeyup="PF('customersTable').filter()"
+                                     style="width:150px"/>
+                    </p:outputPanel>
+                </f:facet>
                 <p:column>
                     <f:facet name="header">
                         <h:outputText value="Id"/>
                     </f:facet>
-                    <h:outputText value="#{item.customerId}"/>
+                    <h:link outcome="customerDetails?idCustomer=#{item.customerId}" value="#{item.customerId}"/>
                 </p:column>
 
                 <p:column sortBy="#{item.name}" filterBy="#{item.name}">
                     <f:facet name="header">
                         <h:outputText value="Nom"/>
                         <f:facet name="filter">
-                </f:facet>
+                        </f:facet>
                     </f:facet>
-                    
+
                     <h:outputText value="#{item.name}"/>
                 </p:column>
                 <p:column sortBy="#{item.city}">
@@ -40,9 +48,9 @@
                 <p:column sortBy="#{item.state}">
                     <f:facet name="header">
                         <p:selectOneMenu onchange="PF('customersTable').filter()" styleClass="ui-custom-filter">
-                        <f:selectItem itemLabel="All" itemValue="#{null}" noSelectionOption="true" />
-                        <f:selectItems value="#{CustomerBean.states}" var="state" itemLabel="#{state}" itemValue="#{state}" />
-                    </p:selectOneMenu>
+                            <f:selectItem itemLabel="All" itemValue="#{null}" noSelectionOption="true" />
+                            <f:selectItems value="#{CustomerBean.states}" var="state" itemLabel="#{state}" itemValue="#{state}" />
+                        </p:selectOneMenu>
                         <h:outputText value="Etat"/>
                     </f:facet>
                     <h:outputText value="#{item.state}"/>
