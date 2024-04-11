@@ -28,6 +28,13 @@ public class CustomerManager {
        return query.getResultList();
     }
 
+    public List<String> getAllStates() {
+       Query query = em.createNamedQuery("Customer.findByDistinctState");
+       System.out.println("======COUOCU");
+        System.out.println(query.getResultList());
+       return query.getResultList();
+    }
+
     @Transactional
     public Customer update(Customer customer) {
        return em.merge(customer);

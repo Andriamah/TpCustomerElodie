@@ -37,7 +37,9 @@ import jakarta.persistence.Table;
     @NamedQuery(name = "Customer.findByPhone", query = "SELECT c FROM Customer c WHERE c.phone = :phone"),
     @NamedQuery(name = "Customer.findByFax", query = "SELECT c FROM Customer c WHERE c.fax = :fax"),
     @NamedQuery(name = "Customer.findByEmail", query = "SELECT c FROM Customer c WHERE c.email = :email"),
-    @NamedQuery(name = "Customer.findByCreditLimit", query = "SELECT c FROM Customer c WHERE c.creditLimit = :creditLimit")})
+    @NamedQuery(name = "Customer.findByCreditLimit", query = "SELECT c FROM Customer c WHERE c.creditLimit = :creditLimit"),
+    @NamedQuery(name = "Customer.findByDistinctState", query = "SELECT DISTINCT c.state FROM Customer c")
+})
 public class Customer implements Serializable {
 
     private static final long serialVersionUID = 1L;

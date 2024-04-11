@@ -22,6 +22,7 @@ import java.util.List;
 @ViewScoped
 public class CustomerBean implements Serializable{
     private List<Customer> customerList;  
+    private List<String> statesList; 
 
   @Inject
   private CustomerManager customerManager;  
@@ -37,4 +38,11 @@ public class CustomerBean implements Serializable{
     }
     return customerList;
   }  
+
+ public List<String> getStates() {
+        if (statesList == null) {
+            statesList = customerManager.getAllStates();
+        }
+        return statesList;
+    }
 }
