@@ -11,6 +11,9 @@ import java.io.Serializable;
 import jakarta.inject.Inject;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
+import java.util.List;
+import mg.itu.tpcustomerelodie.entity.Discount;
+import mg.itu.tpcustomerelodie.service.DiscountManager;
 
 /**
  *
@@ -24,6 +27,8 @@ public class CustomerDetailsBean implements Serializable{
 
   @Inject
   private CustomerManager customerManager;
+  @Inject
+  private DiscountManager discountManager;
 
   public int getIdCustomer() {
     return idCustomer;
@@ -32,7 +37,12 @@ public class CustomerDetailsBean implements Serializable{
   public void setIdCustomer(int idCustomer) {
     this.idCustomer = idCustomer;
   }
-
+/**
+   * Retourne la liste de tous les Discount.
+   */
+  public List<Discount> getDiscounts() {
+    return discountManager.getAllDiscounts();
+  }
   /**
    * Retourne les détails du client courant (contenu dans l'attribut customer de
    * cette classe).

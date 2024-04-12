@@ -20,23 +20,18 @@ import mg.itu.tpcustomerelodie.entity.MicroMarket;
 @RequestScoped
 public class MicroMarketManager {
      @PersistenceContext(unitName = "microMarketPU")
-    private EntityManager microMarketManger;
+    private EntityManager em;
      /**
    * Retourne la liste de tous les Discount.
      * @return 
    */
      public List<MicroMarket> getAllMicroMarkets() {
-       Query query = microMarketManger.createNamedQuery("MicroMarket.findAll");
+       Query query = em.createNamedQuery("MicroMarket.findAll");
        return query.getResultList();
     }
 
     @Transactional
     public MicroMarket update(MicroMarket microMarket) {
-       return microMarketManger.merge(microMarket);
-    }
-
-    @Transactional
-    public void persist(MicroMarket microMarket) {
-       microMarketManger.persist(microMarket);
+       return em.merge(microMarket);
     }
 }

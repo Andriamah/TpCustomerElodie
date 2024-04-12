@@ -14,29 +14,32 @@ import mg.itu.tpcustomerelodie.entity.Discount;
 
 /**
  * Gère la persistance des Customers.
+ *
  * @author andri
  */
 
 @RequestScoped
 public class DiscountManager {
+
     @PersistenceContext(unitName = "discountPU")
-    private EntityManager discountManger;
-     /**
-   * Retourne la liste de tous les Discount.
-     * @return 
-   */
-     public List<Discount> getAllDiscounts() {
-       Query query = discountManger.createNamedQuery("Discount.findAll");
-       return query.getResultList();
+    private EntityManager em;
+
+    /**
+     * Retourne la liste de tous les Discount.
+     *
+     * @return
+     */
+    public List<Discount> getAllDiscounts() {
+        Query query = em.createNamedQuery("Discount.findAll");
+        return query.getResultList();
+    }
+
+    public Discount findById(String code) {
+        return em.find(Discount.class, code);
     }
 
     @Transactional
     public Discount update(Discount discount) {
-       return discountManger.merge(discount);
-    }
-
-    @Transactional
-    public void persist(Discount discount) {
-       discountManger.persist(discount);
+        return em.merge(discount);
     }
 }
